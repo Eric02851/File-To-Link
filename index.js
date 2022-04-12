@@ -23,22 +23,14 @@ app.get('/', (req, res) => {
 
 app.post('/', function (req, res) {
     upload(req, res, function (err) {
-        res.send(`${domain}/userFiles/${req.file.originalname}`)
-        console.log(req.file)
-        if (err instanceof multer.MulterError) {
-            // A Multer error occurred when uploading.
-        } else if (err) {
-            // An unknown error occurred when uploading.
-        }
-        // Everything went fine.
+        res.send(`http://${domain}:${port}/userFiles/${req.file.originalname}`)
+        console.log(req.file.originalname)
     })
-    
-
 })
 
 if (!fs.existsSync('public/userFiles')) {
     fs.mkdirSync('public/userFiles')
 }
 app.listen(port, () => {
-  console.log(`Example app listening on port ${port}`)
+    console.log(`Listening on port ${port}`)
 })
